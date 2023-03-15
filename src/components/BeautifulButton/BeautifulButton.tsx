@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./BeautifulButton.css";
+import { useBeautifulButton } from "./useBeautifulButton";
 
 interface Props {
   text: string;
@@ -19,25 +20,15 @@ interface Props {
 
 
 function BeautifulButton({action, onCountChange}: Props) {
-  const [texto, setTexto] = useState("Hola Mundo");
   const [count, setCount] = useState(0);
+  
+  const {texto} = useBeautifulButton({id: count});
   
 // No segundo parametro dice a useEffect que corra siempre cuando el componente se renderiza
 
 // [] array vacio, le dice a useEffect que corra solo una vez cuando el componente se renderiza la primera vez
 
 //console.log("BeautifulButton was rendered!", Date.now());
-
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/todos/28")    
-    .then(response => response.json())
-    .then(json => {
-      console.log('Data' + json);
-      return json;
-    })
-    .then(json => setTexto(json.title))
-    .catch(error => console.log(error))
-  }, []);
 
   useEffect(() => {
     console.log("useEffect was run!", texto);
